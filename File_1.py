@@ -1,0 +1,96 @@
+#Taking Input From User
+n = int(input("Enter the Number of Students :  "))
+inp = []
+sum = 0
+for i in range(n):
+	print("Roll Number ", (i+1), " : ")
+	A = input("Enter marks ( Enter [Ab] -> if absent) : ")
+	while True:
+		if(A >= "0" and A<= "50"):
+			break
+		elif(A == "Ab"):
+			break;
+		else:
+			print("Invalid Marks")
+			print("Please Enter Valid Marks : ")
+			A = input(" Please Enter Marks ( Enter [Ab] -> if absent) : ")
+		
+	inp.append(A)
+	
+	
+print("\n")
+
+
+#Absent Students
+ab = []
+student = 0
+for w in range(n):
+	if(inp[w] == "Ab"):
+		ab.append(w+1)
+		student += 1
+print("Absent Students Roll Numbers are : ",ab)
+print("Total Count of Absent Students are : ", student)
+
+
+#Average Score
+for j in range(n):
+	if(inp[j] == "Ab"):
+		ab.append(n)
+	else:
+		sum = sum + int(inp[j])
+print("Average of Marks is :",sum/n)
+
+
+#Highest Score
+for t in range(n):
+	if(inp[t] == "Ab"):
+		pass
+	else:
+		maximum = int(inp[t])
+		break
+		
+for v in range(n):
+	if(inp[v] == "Ab"):
+		pass
+	elif(int(inp[v]) > maximum):
+		maximum = int(inp[v])
+print("Maximum Scored Marks is : ",maximum)
+
+
+#Lowest Score
+for b in range(n):
+	if(inp[b] == "Ab"):
+		pass
+	else:
+		minimum = int(inp[b])
+		break
+
+for s in range(n):
+	if(inp[s] == "Ab"):
+		pass
+	elif(int(inp[s]) < minimum):
+		minimum = int(inp[s])
+print("Minimum scored Marks is : ",minimum) 
+
+
+
+#Highest Frequency Marks
+count = 0
+frequency = [0,0,0]
+for q in range(n):
+	count =  0
+	if(inp[q] == "Ab"):
+		pass
+	else:
+		frequency[0] = int(inp[q])
+
+
+	for p in range(n):
+		if inp[q] == inp[p]:
+			count += 1
+	max = count
+	if max > frequency[1]:
+		frequency[1] = max
+		frequency[2] = frequency[0]
+print("Highest Frequency Marks of students are : ", frequency[2], " and is scored by : ", frequency[1]," students ")
+	
