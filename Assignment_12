@@ -1,0 +1,95 @@
+In any language program mostly syntax error occurs due to unbalancing delimiter such as (), {}, []. Write C++ program using stack to check whether given expression is well parenthesized or not.
+
+#include &lt;iostream&gt;
+using namespace std;
+#define size 10
+
+class stackexp
+{
+int top;
+char stk[size];
+public:
+stackexp()
+
+{
+top=-1;
+}
+void push(char);
+char pop();
+int isfull();
+int isempty();
+};
+
+void stackexp::push(char x)
+{
+top=top+1;
+stk[top]=x;
+}
+
+char stackexp::pop()
+{
+char s;
+s=stk[top];
+top=top-1;
+
+return s;
+}
+
+int stackexp::isfull()
+{
+if(top==size)
+return 1;
+else
+return 0;
+}
+
+int stackexp::isempty()
+{
+if(top==-1)
+return 1;
+else
+return 0;
+}
+
+int main()
+
+{
+stackexp s1;
+char exp[20],ch;
+int i=0;
+cout &lt;&lt; &quot;\n\t!! Parenthesis Checker..!!!!&quot; &lt;&lt; endl; // prints !!!Hello World!!!
+cout&lt;&lt;&quot;\nEnter the expression to check whether it is in well form or not : &quot;;
+cin&gt;&gt;exp;
+if((exp[0]==&#39;)&#39;)||(exp[0]==&#39;]&#39;)||(exp[0]==&#39;}&#39;))
+{
+cout&lt;&lt;&quot;\n Invalid Expression.....\n&quot;;
+return 0;
+}
+else
+{
+while(exp[i]!=&#39;\0&#39;)
+{
+ch=exp[i];
+switch(ch)
+{
+
+case &#39;(&#39;:s1.push(ch);break;
+case &#39;[&#39;:s1.push(ch);break;
+case &#39;{&#39;:s1.push(ch);break;
+case &#39;)&#39;:s1.pop();break;
+case &#39;]&#39;:s1.pop();break;
+case &#39;}&#39;:s1.pop();break;
+}
+i=i+1;
+}
+}
+if(s1.isempty())
+{
+cout&lt;&lt;&quot;\nExpression is well parenthesised...\n&quot;;
+}
+else
+{
+cout&lt;&lt;&quot;\nSorry !!! Invalid Expression or not in well parenthesized....\n&quot;;
+}
+return 0;
+}
