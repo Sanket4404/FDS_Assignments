@@ -1,0 +1,268 @@
+// Department of Computer Engineering has student's club named 'Pinnacle Club'. Students of second, third and final year of department can be granted membership on request. Similarly one may cancel the membership of club. First node is reserved for president of club and last node is reserved for secretary of club. Write C++ program to maintain club member‘s information using singly linked list. Store student PRN and Name. Write functions to:
+//a)	Add and delete the members as well as president or even secretary.
+//b)	Compute total number of members of club
+//Display members Two linked lists exists for two divisions. Concatenate two lists.
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+class node
+{
+public:
+	int data;
+	string name;
+	node *next;
+	node *createnode();//done
+	void createSLL();//done
+	void insertAtFirst();//done
+	void insertAtEnd();//done
+	void insertAtMid();//done
+	void deleteAtFirst();//done
+	void deleteAtEnd();//done
+	void deletAtMid();//done
+	void Display();//done
+	void concatinate();
+	void count();//done
+	
+	
+}*head;
+
+node *node::createnode()
+	{
+	node *temp;
+	temp=new node;
+	cout<<"\n Enter PRN=\t";
+	cin>>temp->data;
+	cout<<"\nenter ur name\t";
+	cin>>temp->name;
+	temp->next=NULL;
+	return temp;
+	}
+
+void node :: insertAtFirst()
+{
+	cout<<"enter the data you want to insert";
+	node*newnode = createnode();
+	newnode->next = head;
+	head = newnode;
+	Display();
+
+}
+
+void node :: insertAtEnd()
+{
+	node*newnode = createnode();
+	node*temp = head;
+	while(temp->next!=NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = newnode;
+	Display();
+}
+
+void node :: deleteAtEnd()
+{
+	node*temp = head;
+	node*second = head->next;
+	while(second->next!=NULL)
+	{
+		temp = temp->next;
+		second = second->next;
+	}
+	temp->next = NULL;
+	delete(second);
+	Display();
+}
+
+void node :: deleteAtFirst()
+{
+	node*temp = head;
+	head = temp->next;
+	delete(temp);
+	Display();
+}
+
+void node :: insertAtMid()
+{
+	int index = 0;
+	node*temp = head;
+	cout<<"\nEnter the index after which you want to insert data"<<endl;
+	cin>>index;
+	node*newnode = createnode();
+	for(int i=0;i<index;i++)
+	{
+		temp = temp->next;
+	}
+	newnode->next = temp->next;
+	temp->next = newnode;
+	Display();
+}
+
+void node::count()
+{
+	node *temp;
+	temp=head;
+	int count=1;
+	while(temp->next!=NULL)
+	{
+		count+=1;
+		temp=temp->next;
+	}
+	cout<<"Total Members are:\t"<<count<<endl;
+}
+void node::createSLL()
+{
+	int n,i;
+	cout<<"\nEnter number of members";
+	cin>>n;
+	node *ntemp,*trav;
+	for(i=0;i<n;i++)
+	{
+		ntemp=createnode();
+		if(head==NULL)
+		{
+			head=ntemp;
+		}
+		else
+		{
+			trav=head;
+			while(trav->next!=NULL)
+			{
+				trav=trav->next;
+			}
+			trav->next=ntemp;
+		}
+	}
+}
+
+void node :: deletAtMid()
+{
+	int pos = 0;
+	int i=0;
+	cout<<"enter the position where you want to perform deletion"<<endl;
+	cin>>pos;
+	node*p = head;
+	node*q = head->next;
+	while(i<pos)
+	{
+		p = p->next;
+		q = q->next;
+		i++;
+	}
+	p->next = q->next;
+	delete(q);
+	Display();
+}
+
+void node :: concatinate()
+{
+	node*temp = head;
+	node*head1 = head;
+	createSLL();
+	node*head2 = head;
+	while(temp->next!=NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = head2;
+	head = head1;
+	Display();
+}
+
+void node::Display()
+{
+	cout<<"******************************************"<<endl;
+	node *trav;
+	trav=head;
+	cout<<"Members are:\n";
+	while(trav!=NULL)
+	{
+		cout<<"PRN:\t"<<trav->data;
+		cout<<"\tNAME=>"<<trav->name;
+		cout<<endl;
+		trav=trav->next;
+	}
+	cout<<"NULL";
+	cout<<"\n******************************************"<<endl;
+}
+
+
+
+void getchoice()
+{
+	cout<<"\n__________________________________________________"<<endl;
+	cout<<"0.EXIT\n1.createsll\n2.dispaly\n3.insert AT end\n4. Insert at First\n5.Insert In MID\n6.Delete at END\n7.Delete at First\n8.Delete at mid\n9.Count\n10.concatinate"<<endl;
+	cout<<"__________________________________________________"<<endl;
+}
+
+
+int main()
+{
+	node s;
+	
+	
+	int ch;
+	
+	do
+	{
+		getchoice();		
+		cin>>ch;
+		if(ch==0)
+		{
+			cout<<"GOOD BYE !!!... :)";
+		}
+		
+		switch(ch)
+		{
+			case 1:
+				s.createSLL();
+				break;
+				
+			case 2:
+				s.Display();
+				break;
+				
+			case 3:
+				s.insertAtEnd();
+				break;
+				
+			case 4:
+				s.insertAtFirst();
+				break;
+				
+			case 5:
+				s.insertAtMid();
+				break;
+				
+			case 6:
+				s.deleteAtEnd();
+				break;	
+				
+			case 7:
+				s.deleteAtFirst();
+				break;
+			
+			case 8:
+				s.deletAtMid();
+				break;
+				
+			case 9:
+				s.count();
+				break;
+				
+			case 10:
+				s.concatinate();
+				break;
+		default:
+		{
+			break;
+						
+		};
+		}
+		
+	}while(ch!=0);
+
+	return 0;
+}
